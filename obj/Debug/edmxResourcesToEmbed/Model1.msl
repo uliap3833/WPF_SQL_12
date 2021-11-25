@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities1">
+    <EntitySetMapping Name="Age_group">
+      <EntityTypeMapping TypeName="Model.Age_group">
+        <MappingFragment StoreEntitySet="Age_group">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="age_start" ColumnName="age_start" />
+          <ScalarProperty Name="age_finish" ColumnName="age_finish" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parties">
+      <EntityTypeMapping TypeName="Model.Parties">
+        <MappingFragment StoreEntitySet="Parties">
+          <ScalarProperty Name="color_id" ColumnName="color_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="age_group_id" ColumnName="age_group_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Record">
+      <EntityTypeMapping TypeName="Model.Record">
+        <MappingFragment StoreEntitySet="Record">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="parties_id" ColumnName="parties_id" />
+          <ScalarProperty Name="age_group_id" ColumnName="age_group_id" />
+          <ScalarProperty Name="party_date" ColumnName="party_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="Model.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sex">
+      <EntityTypeMapping TypeName="Model.Sex">
+        <MappingFragment StoreEntitySet="Sex">
+          <ScalarProperty Name="sex_id" ColumnName="sex_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Model.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="sex_id" ColumnName="sex_id" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="otc" ColumnName="otc" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Color">
+      <EntityTypeMapping TypeName="Model.Color">
+        <MappingFragment StoreEntitySet="Color">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

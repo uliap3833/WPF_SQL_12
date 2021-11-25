@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Age_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="age_start" Type="int" />
+          <Property Name="age_finish" Type="int" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Parties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="age_group_id" Type="int" />
+          <Property Name="color_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parties_id" Type="int" />
+          <Property Name="age_group_id" Type="int" />
+          <Property Name="party_date" Type="date" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="sex_id" />
+          </Key>
+          <Property Name="sex_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="30" />
+          <Property Name="last_name" Type="varchar" MaxLength="30" />
+          <Property Name="otc" Type="varchar" MaxLength="30" />
+          <Property Name="login" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="int" />
+          <Property Name="sex_id" Type="int" />
+          <Property Name="role_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_Parties_Age_group">
+          <End Role="Age_group" Type="Self.Age_group" Multiplicity="0..1" />
+          <End Role="Parties" Type="Self.Parties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Age_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Parties">
+              <PropertyRef Name="age_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parties_Color">
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="Parties" Type="Self.Parties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Parties">
+              <PropertyRef Name="color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Age_group">
+          <End Role="Age_group" Type="Self.Age_group" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Age_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="age_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Parties">
+          <End Role="Parties" Type="Self.Parties" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="parties_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sex">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="sex_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="sex_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Age_group" EntityType="Self.Age_group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parties" EntityType="Self.Parties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Parties_Age_group" Association="Self.FK_Parties_Age_group">
+            <End Role="Age_group" EntitySet="Age_group" />
+            <End Role="Parties" EntitySet="Parties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parties_Color" Association="Self.FK_Parties_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Parties" EntitySet="Parties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Age_group" Association="Self.FK_Record_Age_group">
+            <End Role="Age_group" EntitySet="Age_group" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Parties" Association="Self.FK_Record_Parties">
+            <End Role="Parties" EntitySet="Parties" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Users" Association="Self.FK_Record_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles" Association="Self.FK_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sex" Association="Self.FK_Sex">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Age_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="age_start" Type="Int32" />
+          <Property Name="age_finish" Type="Int32" />
+          <NavigationProperty Name="Record" Relationship="Model.FK_Record_Age_group" FromRole="Age_group" ToRole="Record" />
+          <NavigationProperty Name="Parties" Relationship="Model.FK_Parties_Age_group" FromRole="Age_group" ToRole="Parties" />
+        </EntityType>
+        <EntityType Name="Parties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="age_group_id" Type="Int32" />
+          <NavigationProperty Name="Record" Relationship="Model.FK_Record_Parties" FromRole="Parties" ToRole="Record" />
+          <NavigationProperty Name="Age_group" Relationship="Model.FK_Parties_Age_group" FromRole="Parties" ToRole="Age_group" />
+          <Property Name="color_id" Type="Int32" />
+          <NavigationProperty Name="Color" Relationship="Model.FK_Parties_Color" FromRole="Parties" ToRole="Color" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parties_id" Type="Int32" />
+          <Property Name="age_group_id" Type="Int32" />
+          <Property Name="party_date" Type="DateTime" Precision="0" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="Age_group" Relationship="Model.FK_Record_Age_group" FromRole="Record" ToRole="Age_group" />
+          <NavigationProperty Name="Parties" Relationship="Model.FK_Record_Parties" FromRole="Record" ToRole="Parties" />
+          <NavigationProperty Name="Users" Relationship="Model.FK_Record_Users" FromRole="Record" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Model.FK_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="sex_id" />
+          </Key>
+          <Property Name="sex_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Model.FK_Sex" FromRole="Sex" ToRole="Users" />
+        </EntityType>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Age_group" EntityType="Self.Age_group" />
+          <EntitySet Name="Parties" EntityType="Self.Parties" />
+          <EntitySet Name="Record" EntityType="Self.Record" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" />
+          <EntitySet Name="Users" EntityType="Model.Users" />
+          <AssociationSet Name="FK_Roles" Association="Model.FK_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sex" Association="Model.FK_Sex">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Age_group" Association="Model.FK_Record_Age_group">
+            <End Role="Age_group" EntitySet="Age_group" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Parties" Association="Model.FK_Record_Parties">
+            <End Role="Parties" EntitySet="Parties" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Users" Association="Model.FK_Record_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parties_Age_group" Association="Model.FK_Parties_Age_group">
+            <End Role="Age_group" EntitySet="Age_group" />
+            <End Role="Parties" EntitySet="Parties" />
+          </AssociationSet>
+          <EntitySet Name="Color" EntityType="Model.Color" />
+          <AssociationSet Name="FK_Parties_Color" Association="Model.FK_Parties_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Parties" EntitySet="Parties" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="otc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="Int32" />
+          <Property Name="sex_id" Type="Int32" />
+          <Property Name="role_id" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Model.FK_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Sex" Relationship="Model.FK_Sex" FromRole="Users" ToRole="Sex" />
+          <NavigationProperty Name="Record" Relationship="Model.FK_Record_Users" FromRole="Users" ToRole="Record" />
+        </EntityType>
+        <Association Name="FK_Roles">
+          <End Type="Model.Roles" Role="Roles" Multiplicity="0..1" />
+          <End Type="Model.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sex">
+          <End Type="Model.Sex" Role="Sex" Multiplicity="0..1" />
+          <End Type="Model.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="sex_id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="sex_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Age_group">
+          <End Type="Model.Age_group" Role="Age_group" Multiplicity="0..1" />
+          <End Type="Model.Record" Role="Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Age_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="age_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Parties">
+          <End Type="Model.Parties" Role="Parties" Multiplicity="0..1" />
+          <End Type="Model.Record" Role="Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="parties_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Users">
+          <End Type="Model.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="Model.Record" Role="Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parties_Age_group">
+          <End Type="Model.Age_group" Role="Age_group" Multiplicity="0..1" />
+          <End Type="Model.Parties" Role="Parties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Age_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Parties">
+              <PropertyRef Name="age_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Parties" Relationship="Model.FK_Parties_Color" FromRole="Color" ToRole="Parties" />
+        </EntityType>
+        <Association Name="FK_Parties_Color">
+          <End Type="Model.Color" Role="Color" Multiplicity="0..1" />
+          <End Type="Model.Parties" Role="Parties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Parties">
+              <PropertyRef Name="color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="Age_group">
+            <EntityTypeMapping TypeName="Model.Age_group">
+              <MappingFragment StoreEntitySet="Age_group">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="age_start" ColumnName="age_start" />
+                <ScalarProperty Name="age_finish" ColumnName="age_finish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parties">
+            <EntityTypeMapping TypeName="Model.Parties">
+              <MappingFragment StoreEntitySet="Parties">
+                <ScalarProperty Name="color_id" ColumnName="color_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="age_group_id" ColumnName="age_group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Record">
+            <EntityTypeMapping TypeName="Model.Record">
+              <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="parties_id" ColumnName="parties_id" />
+                <ScalarProperty Name="age_group_id" ColumnName="age_group_id" />
+                <ScalarProperty Name="party_date" ColumnName="party_date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Model.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sex">
+            <EntityTypeMapping TypeName="Model.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="sex_id" ColumnName="sex_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="sex_id" ColumnName="sex_id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="otc" ColumnName="otc" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Color">
+            <EntityTypeMapping TypeName="Model.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

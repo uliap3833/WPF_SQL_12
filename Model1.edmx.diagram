@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58e72c96c4854164baa2808183885daf" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Age_group" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Parties" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Record" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Roles" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sex" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Users" Width="1.5" PointX="5.375" PointY="3.75" />
+        <AssociationConnector Association="Model.FK_Roles" />
+        <AssociationConnector Association="Model.FK_Sex" />
+        <AssociationConnector Association="Model.FK_Record_Age_group" />
+        <AssociationConnector Association="Model.FK_Record_Parties" />
+        <AssociationConnector Association="Model.FK_Record_Users" />
+        <AssociationConnector Association="Model.FK_Parties_Age_group" />
+        <EntityTypeShape EntityType="Model.Color" Width="1.5" PointX="7.375" PointY="0.875" />
+        <AssociationConnector Association="Model.FK_Parties_Color" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
